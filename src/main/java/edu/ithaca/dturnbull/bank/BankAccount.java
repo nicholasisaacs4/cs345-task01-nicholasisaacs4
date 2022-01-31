@@ -79,4 +79,25 @@ public class BankAccount {
         }
 
     }
+
+    public void deposit(double amount) throws InsufficientFundsException{
+        //if amount is valid then we add to our origial balance 
+        if(isAmountValid(amount)){
+            balance += amount;
+        }
+        else{
+            throw new InsufficientFundsException("not valid");
+        }
+    }
+    
+    public void Transfer(BankAccount bank, double amount) throws InsufficientFundsException{
+        //if amount is valid then we can transfer 
+        if(isAmountValid(amount)){
+            withdraw(amount);
+            bank.deposit(amount);
+        }
+        else{
+            throw new InsufficientFundsException("Amount Not Valid");
+        }
+    }
 }

@@ -69,6 +69,39 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest() throws InsufficientFundsException {
+        BankAccount bankAccount = new BankAccount("a@b.com", 500);
+        bankAccount.deposit(100);
+        assertEquals(600, bankAccount.getBalance(), 0.001);
+        bankAccount.deposit(600);
+        assertEquals(1200, bankAccount.getBalance(), 0.001);
+        bankAccount.deposit(50.4);
+        assertEquals(1250.4, bankAccount.getBalance(), 0.001);
+        bankAccount.withdraw(.4);
+        assertEquals(1250, bankAccount.getBalance(), 0.001);
+        bankAccount.deposit(400);
+        assertEquals(1650, bankAccount.getBalance(), 0.001);
+        // Error Cases
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-10.452));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.deposit(-10.452));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.deposit(100000.00003));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.deposit(-45.566423));
+    }
+
+    @Test
+    void transferTest() throws InsufficientFundsException {
+        BankAccount bankAccount = new BankAccount("a@b.com", 300);
+        BankAccount bankAccount02 = new BankAccount("b@a.net", 4000);
+        assertEquals(300, bankAccount.getBalance(), 0.001);
+        assertEquals(4000, bankAccount02.getBalance(), 0.001);
+        // Error cases
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -34.7654));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -34.6654));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, 60.4363));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.Transfer(bankAccount02, -90));
+    }
+
+    @Test
     void constructorTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
