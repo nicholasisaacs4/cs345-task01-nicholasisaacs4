@@ -9,8 +9,10 @@ class BankAccountTest {
     @Test
     void getBalanceTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
-
         assertEquals(200, bankAccount.getBalance(), 0.001);
+
+        BankAccount bankAccount02 = new BankAccount("a@b.com", 0);
+        assertEquals(0, bankAccount02.getBalance(), 0.001);
     }
 
     @Test
