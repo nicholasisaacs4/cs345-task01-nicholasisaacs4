@@ -53,4 +53,18 @@ public class BankAccount {
             return true;
         }
     }
+
+    public static boolean isAmountValid(double amount){
+
+        if(amount < 0){
+            return false;
+        }
+        if((amount*100) % 1 != 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
 }
