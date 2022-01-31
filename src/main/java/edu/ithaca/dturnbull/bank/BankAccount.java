@@ -30,11 +30,16 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
-            balance -= amount;
+        if(isAmountValid(amount)){
+            if(amount <= balance){
+                balance -= amount;
+            }
+            else {
+                throw new InsufficientFundsException("Not enough money");
+            }
         }
-        else {
-            throw new InsufficientFundsException("Not enough money");
+        else{
+            throw new InsufficientFundsException("Not a valid amount");
         }
     }
 
@@ -49,6 +54,12 @@ public class BankAccount {
         if (email.length() <= 3){
             return false;
         }
+        if (email.indexOf('.') == 0) {
+            return false;
+        }
+        else if (email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)) {
+            return false;
+        }
         else {
             return true;
         }
@@ -58,6 +69,7 @@ public class BankAccount {
 
         if(amount < 0){
             return false;
+
         }
         if((amount*100) % 1 != 0){
             return false;

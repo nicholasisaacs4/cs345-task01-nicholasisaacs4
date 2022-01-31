@@ -28,6 +28,9 @@ class BankAccountTest {
         assertEquals(300, bankAccount02.getBalance(), 0.001);
         bankAccount02.withdraw(300);
         assertEquals(0, bankAccount02.getBalance(), 0.001);
+        //Exception Tests
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(8.333));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300.432));
     }
 
     @Test
@@ -49,6 +52,22 @@ class BankAccountTest {
         
     }
 
+    @Test 
+    void amountValidTest(){
+        //true cases
+        assertTrue(BankAccount.isAmountValid(13.0));
+        assertTrue(BankAccount.isAmountValid(3.1));
+        assertTrue(BankAccount.isAmountValid(5.5));
+        assertTrue(BankAccount.isAmountValid(9.32));
+        //false cases 
+        assertFalse(BankAccount.isAmountValid(-18));
+        assertFalse(BankAccount.isAmountValid(-945));
+        assertFalse(BankAccount.isAmountValid(80.567));
+        assertFalse(BankAccount.isAmountValid(3.2222));
+        
+
+    }
+
     @Test
     void constructorTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
@@ -57,6 +76,10 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        //doubles will throw exceptions 
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(21.333));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-40));
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-15.848));
     }
 
 }
