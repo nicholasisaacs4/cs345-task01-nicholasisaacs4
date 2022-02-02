@@ -54,7 +54,7 @@ public class BankAccount {
         if (email.indexOf('.') == 0) {
             return false;
         }
-        if (email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)) {
+        if (email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)) { //checks for multiple periods in our email inputs and returns false if two are present
             return false;
         }
         if (email.indexOf('(') > email.indexOf('@')){
@@ -70,7 +70,7 @@ public class BankAccount {
         if(amount < 0){
             return false;
         }
-        if((amount*100)% 1 != 0){
+        if((amount*100)% 1 != 0){//detrmines weather the values has correct decimal places and retruns false if it doesnt 
             return false;
         }
         else{
@@ -78,6 +78,9 @@ public class BankAccount {
         }
     }
 
+     /**
+     * @post if the amount is valid we deposit an amount into balance 
+     */
     public void deposit(double amount) throws InsufficientFundsException{
         //if amount is valid then we add to our origial balance 
         if(isAmountValid(amount)){ 
@@ -88,6 +91,9 @@ public class BankAccount {
         }
     }
     
+     /**
+     * @post if amount is valid the we withdraw amount from account and deposit into another account 
+     */
     public void Transfer(BankAccount bank, double amount) throws InsufficientFundsException{
         //if amount is valid then we can transfer 
         if(isAmountValid(amount)){
