@@ -45,9 +45,6 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
-            return false;
-        }
         if (email.indexOf('.') == 0){
             return false;
         }
@@ -57,7 +54,10 @@ public class BankAccount {
         if (email.indexOf('.') == 0) {
             return false;
         }
-        else if (email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)) {
+        if (email.charAt(email.indexOf('.')) == email.charAt(email.indexOf('.') + 1)) {
+            return false;
+        }
+        if (email.indexOf('(') > email.indexOf('@')){
             return false;
         }
         else {
@@ -69,20 +69,18 @@ public class BankAccount {
 
         if(amount < 0){
             return false;
-
         }
-        if((amount*100) % 1 != 0){
+        if((amount*100)% 1 != 0){
             return false;
         }
         else{
             return true;
         }
-
     }
 
     public void deposit(double amount) throws InsufficientFundsException{
         //if amount is valid then we add to our origial balance 
-        if(isAmountValid(amount)){
+        if(isAmountValid(amount)){ 
             balance += amount;
         }
         else{

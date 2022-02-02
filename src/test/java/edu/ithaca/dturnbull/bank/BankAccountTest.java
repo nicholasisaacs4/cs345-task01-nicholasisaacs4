@@ -40,14 +40,12 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("firstname.lastname@example.com"));
         assertTrue(BankAccount.isEmailValid("email@example.museum"));
         assertTrue(BankAccount.isEmailValid("firstname-lastname@example.com"));
-
         assertFalse(BankAccount.isEmailValid("a@")); // should be False
         assertFalse(BankAccount.isEmailValid("a@d")); // should be False
         assertFalse(BankAccount.isEmailValid("@")); // should be False
         assertFalse(BankAccount.isEmailValid(".email@example.com")); // should be False
         assertFalse(BankAccount.isEmailValid("email..email@example.com")); // should be False
         assertFalse(BankAccount.isEmailValid("email@example.com (Joe Smith)")); // should be False
-        assertFalse(BankAccount.isEmailValid("email@example")); // should be False
         assertFalse(BankAccount.isEmailValid("")); // empty string
         
     }
